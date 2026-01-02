@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>🎉 Kado Ulang Tahun Digital</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎁</text></svg>">
+</head>
+<body>
+    <!-- Terompet Kiri dan Kanan -->
+    <div class="trumpet-left">
+        <div class="trumpet">🎺</div>
+        <div class="sound-wave"></div>
+    </div>
+    
+    <div class="trumpet-right">
+        <div class="trumpet">🎷</div>
+        <div class="sound-wave"></div>
+    </div>
+
+    <!-- Chibi Characters -->
+    <div class="chibi-container">
+        <div class="chibi chibi-1">🎈</div>
+        <div class="chibi chibi-2">🎁</div>
+        <div class="chibi chibi-3">✨</div>
+        <div class="chibi chibi-4">⭐</div>
+        <div class="chibi chibi-5">🎂</div>
+        <div class="chibi chibi-6">💝</div>
+    </div>
+
+    <!-- Music Control -->
+    <div class="music-control">
+        <button id="musicBtn" class="music-toggle">
+            <i class="fas fa-music"></i>
+            <span class="music-text">Musik</span>
+        </button>
+        <audio id="bgMusic" loop>
+            <source src="https://assets.mixkit.co/music/preview/mixkit-happy-birthday-to-you-443.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <!-- HALAMAN 1: MASUKKAN NAMA -->
+    <section id="intro-page" class="page active">
+        <div class="container wide-container">
+            <div class="intro-wrapper">
+                <div class="intro-header">
+                    <h1 class="main-title">🎊 <span class="highlight">KADO DIGITAL</span> 🎊</h1>
+                    <p class="tagline">Kejutan spesial untuk orang terkasih</p>
+                </div>
+
+                <div class="intro-card">
+                    <div class="card-icon">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    
+                    <h2 class="question-title">Siapa nama kamu?</h2>
+                    <p class="instruction">Masukkan nama kamu untuk mulai petualangan ini</p>
+                    
+                    <div class="name-input-section">
+                        <div class="input-wrapper">
+                            <i class="fas fa-user input-icon"></i>
+                            <input type="text" id="userNameInput" 
+                                   placeholder="Nama kamu" 
+                                   maxlength="20" autocomplete="off">
+                            <div class="input-border"></div>
+                        </div>
+                        
+                        <button id="startButton" class="start-button">
+                            <i class="fas fa-play"></i>
+                            <span>Mulai Sekarang</span>
+                        </button>
+                    </div>
+                    
+                    <div class="info-box">
+                        <p><i class="fas fa-info-circle"></i> Nama kamu akan muncul di kado spesial ini</p>
+                    </div>
+                </div>
+
+                <div class="creator-info">
+                    <p>Dibuat dengan ❤️ oleh <span id="creatorName">[Nama Pengirim]</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HALAMAN 2: GAME TEBAK KATA -->
+    <section id="game-page" class="page">
+        <div class="container wide-container">
+            <div class="game-wrapper">
+                <div class="game-header">
+                    <h1>🎮 <span id="playerNameDisplay">Teman</span>, Ayo Main!</h1>
+                    <p class="game-subtitle">Tebak kata untuk membuka kunci kado</p>
+                </div>
+
+                <div class="game-content">
+                    <div class="game-info">
+                        <div class="game-card">
+                            <h3><i class="fas fa-puzzle-piece"></i> Tebak Kata Rahasia</h3>
+                            <p>Tebak kata yang berhubungan dengan <strong>ulang tahun</strong></p>
+                            <div class="hint-box">
+                                <p><i class="fas fa-lightbulb"></i> Hint: Kata terdiri dari 5 huruf</p>
+                            </div>
+                        </div>
+
+                        <div class="game-stats">
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <p class="stat-label">Nyawa</p>
+                                    <p class="stat-value" id="livesCounter">5</p>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <p class="stat-label">Score</p>
+                                    <p class="stat-value" id="scoreDisplay">0</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="game-board">
+                        <div class="word-display">
+                            <div class="letter-slots">
+                                <div class="slot">_</div>
+                                <div class="slot">_</div>
+                                <div class="slot">_</div>
+                                <div class="slot">_</div>
+                                <div class="slot">_</div>
+                            </div>
+                            <p class="word-label">Kata Rahasia (5 huruf)</p>
+                        </div>
+
+                        <div class="hint-display">
+                            <div class="hint-content">
+                                <i class="fas fa-scroll"></i>
+                                <p>Hint: <span id="hintText">Kegiatan saat ulang tahun</span></p>
+                            </div>
+                        </div>
+
+                        <div class="letter-input">
+                            <h3><i class="fas fa-keyboard"></i> Masukkan Huruf:</h3>
+                            <div class="letters-grid">
+                                <button class="letter-btn" data-letter="A">A</button>
+                                <button class="letter-btn" data-letter="B">B</button>
+                                <button class="letter-btn" data-letter="C">C</button>
+                                <button class="letter-btn" data-letter="D">D</button>
+                                <button class="letter-btn" data-letter="E">E</button>
+                                <button class="letter-btn" data-letter="F">F</button>
+                                <button class="letter-btn" data-letter="G">G</button>
+                                <button class="letter-btn" data-letter="H">H</button>
+                                <button class="letter-btn" data-letter="I">I</button>
+                                <button class="letter-btn" data-letter="J">J</button>
+                                <button class="letter-btn" data-letter="K">K</button>
+                                <button class="letter-btn" data-letter="L">L</button>
+                                <button class="letter-btn" data-letter="M">M</button>
+                                <button class="letter-btn" data-letter="N">N</button>
+                                <button class="letter-btn" data-letter="O">O</button>
+                                <button class="letter-btn" data-letter="P">P</button>
+                                <button class="letter-btn" data-letter="Q">Q</button>
+                                <button class="letter-btn" data-letter="R">R</button>
+                                <button class="letter-btn" data-letter="S">S</button>
+                                <button class="letter-btn" data-letter="T">T</button>
+                                <button class="letter-btn" data-letter="U">U</button>
+                                <button class="letter-btn" data-letter="V">V</button>
+                                <button class="letter-btn" data-letter="W">W</button>
+                                <button class="letter-btn" data-letter="X">X</button>
+                                <button class="letter-btn" data-letter="Y">Y</button>
+                                <button class="letter-btn" data-letter="Z">Z</button>
+                            </div>
+                        </div>
+
+                        <div class="game-feedback">
+                            <div class="feedback-box" id="feedbackBox">
+                                <i class="fas fa-gamepad"></i>
+                                <span class="feedback-text">Pilih huruf untuk mulai bermain!</span>
+                            </div>
+                            
+                            <div class="game-actions">
+                                <button id="newWordBtn" class="action-btn secondary">
+                                    <i class="fas fa-redo"></i> Kata Baru
+                                </button>
+                                <button id="skipGameBtn" class="action-btn primary">
+                                    <i class="fas fa-forward"></i> Lewati Game
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HALAMAN 3: AMPLOP KADO -->
+    <section id="envelope-page" class="page">
+        <div class="container wide-container">
+            <div class="envelope-wrapper">
+                <div class="success-header">
+                    <h1 class="success-title">🎉 SELAMAT <span id="winnerName">[Nama]</span>! 🎉</h1>
+                    <p class="success-message">Kamu berhasil! Sekarang buka kadomu...</p>
+                </div>
+
+                <div class="envelope-section">
+                    <!-- Amplop Sederhana -->
+                    <div class="simple-envelope" id="simpleEnvelope">
+                        <div class="envelope-top">
+                            <div class="envelope-seal">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                        </div>
+                        <div class="envelope-body">
+                            <div class="envelope-text">
+                                <h3>KADO SPESIAL</h3>
+                                <p>Untukmu yang berulang tahun</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="open-instruction">
+                        <p><i class="fas fa-hand-point-up"></i> Klik amplop untuk membuka</p>
+                    </div>
+                </div>
+
+                <div class="recipient-info">
+                    <div class="info-display">
+                        <div class="info-row">
+                            <i class="fas fa-user-tag"></i>
+                            <div class="info-content">
+                                <p class="info-label">UNTUK</p>
+                                <p class="info-value" id="recipientName">[Nama Penerima]</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-row">
+                            <i class="fas fa-heart-circle-check"></i>
+                            <div class="info-content">
+                                <p class="info-label">DARI</p>
+                                <p class="info-value" id="senderName">[Nama Pengirim]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HALAMAN 4: KADO TERBUKA -->
+    <section id="gift-page" class="page">
+        <div class="container wide-container">
+            <div class="gift-wrapper">
+                <!-- Confetti Effect -->
+                <div class="confetti-overlay"></div>
+                
+                <div class="gift-header">
+                    <h1 class="gift-title">🎁 KADO UNTUKMU 🎁</h1>
+                    <p class="gift-subtitle">Kejutan penuh cinta dari kami</p>
+                </div>
+
+                <div class="gift-content">
+                    <!-- Avatar Circle -->
+                    <div class="avatar-section">
+                        <div class="avatar-circle">
+                            <div class="avatar-inner">
+                                <i class="fas fa-user-astronaut"></i>
+                            </div>
+                            <div class="avatar-ring"></div>
+                            <div class="avatar-glow"></div>
+                        </div>
+                        
+                        <div class="avatar-name">
+                            <h2 id="giftRecipientName">[Nama Penerima]</h2>
+                            <p class="avatar-subtitle">Orang Spesial Hari Ini</p>
+                        </div>
+                    </div>
+
+                    <!-- Message Card -->
+                    <div class="message-card">
+                        <div class="message-header">
+                            <i class="fas fa-quote-left"></i>
+                            <h3>Pesan Spesial</h3>
+                            <i class="fas fa-quote-right"></i>
+                        </div>
+                        
+                        <div class="message-body">
+                            <div class="message-content" id="messageContent">
+                                <!-- Pesan akan dimuat di sini -->
+                            </div>
+                            
+                            <div class="message-footer">
+                                <div class="message-date">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span id="currentDate">[Tanggal]</span>
+                                </div>
+                                
+                                <div class="signature">
+                                    <div class="signature-line"></div>
+                                    <p>Dengan penuh kasih sayang,</p>
+                                    <h4 id="giftSenderName">[Nama Pengirim]</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="action-btn share-btn" id="shareButton">
+                        <i class="fas fa-share"></i>
+                        <span>Bagikan</span>
+                    </button>
+                    
+                    <button class="action-btn replay-btn" id="replayButton">
+                        <i class="fas fa-sync-alt"></i>
+                        <span>Ulangi</span>
+                    </button>
+                </div>
+
+                <div class="footer-note">
+                    <p><i class="fas fa-heart"></i> Kado digital ini dibuat khusus untukmu. Semoga harimu menyenangkan!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-cogs"></i> Pengaturan</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="setting-group">
+                    <label><i class="fas fa-user-edit"></i> Nama Pengirim:</label>
+                    <input type="text" id="setSenderName" placeholder="Masukkan nama pengirim">
+                </div>
+                
+                <div class="setting-group">
+                    <label><i class="fas fa-edit"></i> Pesan Kado:</label>
+                    <textarea id="setMessage" placeholder="Tulis pesan untuk kado..." rows="5"></textarea>
+                </div>
+                
+                <div class="setting-group">
+                    <label><i class="fas fa-volume-up"></i> Volume Musik:</label>
+                    <input type="range" id="volumeSlider" min="0" max="100" value="50">
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn-cancel" id="cancelSettings">Batal</button>
+                <button class="btn btn-save" id="saveSettings">Simpan</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
